@@ -1,0 +1,271 @@
+version: 2
+updates:
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: daily
+
+  - package-ecosystem: gomod
+    directory: /api/go
+    schedule:
+      interval: daily
+
+  - package-ecosystem: docker
+    directory: /build-tools/src/scripts
+    schedule:
+      interval: daily
+
+  - package-ecosystem: pip
+    directory: /docs/mkdocs
+    schedule:
+      interval: daily
+
+  - package-ecosystem: gomod
+    directory: /libs
+    schedule:
+      interval: daily
+
+  - package-ecosystem: docker
+    directory: /pkg/acrn-kernel
+    schedule:
+      interval: daily
+
+  - package-ecosystem: docker
+    directory: /pkg/acrn
+    schedule:
+      interval: daily
+
+  - package-ecosystem: docker
+    directory: /pkg/alpine-base
+    schedule:
+      interval: daily
+
+  - package-ecosystem: docker
+    directory: /pkg/alpine
+    schedule:
+      interval: daily
+
+  - package-ecosystem: docker
+    directory: /pkg/bsp-imx
+    schedule:
+      interval: daily
+
+  - package-ecosystem: docker
+    directory: /pkg/cross-compilers
+    schedule:
+      interval: daily
+
+  - package-ecosystem: docker
+    directory: /pkg/debug
+    schedule:
+      interval: daily
+
+  - package-ecosystem: docker
+    directory: /pkg/dnsmasq
+    schedule:
+      interval: daily
+
+  - package-ecosystem: docker
+    directory: /pkg/dom0-ztools
+    schedule:
+      interval: daily
+
+  - package-ecosystem: docker
+    directory: /pkg/edgeview
+    schedule:
+      interval: daily
+
+  - package-ecosystem: gomod
+    directory: /pkg/edgeview
+    schedule:
+      interval: daily
+
+  - package-ecosystem: docker
+    directory: /pkg/fscrypt
+    schedule:
+      interval: daily
+
+  - package-ecosystem: docker
+    directory: /pkg/fw
+    schedule:
+      interval: daily
+
+  - package-ecosystem: docker
+    directory: /pkg/gpt-tools
+    schedule:
+      interval: daily
+
+  - package-ecosystem: docker
+    directory: /pkg/grub
+    schedule:
+      interval: daily
+
+  - package-ecosystem: docker
+    directory: /pkg/guacd
+    schedule:
+      interval: daily
+
+  - package-ecosystem: docker
+    directory: /pkg/ipxe
+    schedule:
+      interval: daily
+
+  - package-ecosystem: docker
+    directory: /pkg/kdump
+    schedule:
+      interval: daily
+
+  - package-ecosystem: docker
+    directory: /pkg/kernel
+    schedule:
+      interval: daily
+
+  - package-ecosystem: docker
+    directory: /pkg/kexec
+    schedule:
+      interval: daily
+
+  - package-ecosystem: docker
+    directory: /pkg/kvm-tools
+    schedule:
+      interval: daily
+
+  - package-ecosystem: docker
+    directory: /pkg/measure-config
+    schedule:
+      interval: daily
+
+  - package-ecosystem: gomod
+    directory: /pkg/measure-config
+    schedule:
+      interval: daily
+
+  - package-ecosystem: docker
+    directory: /pkg/mkconf
+    schedule:
+      interval: daily
+
+  - package-ecosystem: docker
+    directory: /pkg/mkimage-iso-efi
+    schedule:
+      interval: daily
+
+  - package-ecosystem: docker
+    directory: /pkg/mkimage-raw-efi
+    schedule:
+      interval: daily
+
+  - package-ecosystem: docker
+    directory: /pkg/mkrootfs-ext4
+    schedule:
+      interval: daily
+
+  - package-ecosystem: docker
+    directory: /pkg/mkrootfs-squash
+    schedule:
+      interval: daily
+
+  - package-ecosystem: docker
+    directory: /pkg/new-kernel
+    schedule:
+      interval: daily
+
+  - package-ecosystem: docker
+    directory: /pkg/newlog
+    schedule:
+      interval: daily
+
+  - package-ecosystem: gomod
+    directory: /pkg/newlog
+    schedule:
+      interval: daily
+
+  - package-ecosystem: docker
+    directory: /pkg/pillar
+    schedule:
+      interval: daily
+
+  - package-ecosystem: gomod
+    directory: /pkg/pillar
+    schedule:
+      interval: daily
+
+  - package-ecosystem: docker
+    directory: /pkg/pillar/vendor/github.com/docker/distribution
+    schedule:
+      interval: daily
+
+  - package-ecosystem: docker
+    directory: /pkg/pillar/vendor/github.com/jaypipes/ghw
+    schedule:
+      interval: daily
+
+  - package-ecosystem: docker
+    directory: /pkg/pillar/vendor/golang.org/x/net/http2
+    schedule:
+      interval: daily
+
+  - package-ecosystem: docker
+    directory: /pkg/rngd
+    schedule:
+      interval: daily
+
+  - package-ecosystem: docker
+    directory: /pkg/storage-init
+    schedule:
+      interval: daily
+
+  - package-ecosystem: docker
+    directory: /pkg/strongswan
+    schedule:
+      interval: daily
+
+  - package-ecosystem: docker
+    directory: /pkg/test-microsvcs
+    schedule:
+      interval: daily
+
+  - package-ecosystem: docker
+    directory: /pkg/u-boot
+    schedule:
+      interval: daily
+
+  - package-ecosystem: docker
+    directory: /pkg/uefi
+    schedule:
+      interval: daily
+
+  - package-ecosystem: docker
+    directory: /pkg/vtpm
+    schedule:
+      interval: daily
+
+  - package-ecosystem: docker
+    directory: /pkg/watchdog
+    schedule:
+      interval: daily
+
+  - package-ecosystem: docker
+    directory: /pkg/wlan
+    schedule:
+      interval: daily
+
+  - package-ecosystem: docker
+    directory: /pkg/wwan
+    schedule:
+      interval: daily
+
+  - package-ecosystem: docker
+    directory: /pkg/xen-tools
+    schedule:
+      interval: daily
+
+  - package-ecosystem: docker
+    directory: /pkg/xen
+    schedule:
+      interval: daily
+
+  - package-ecosystem: gomod
+    directory: /tools/dockerfile-add-scanner
+    schedule:
+      interval: daily

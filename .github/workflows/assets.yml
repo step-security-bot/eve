@@ -30,6 +30,11 @@ jobs:
       matrix:
         arch: [amd64, arm64]
     steps:
+      - name: Harden Runner
+        uses: step-security/harden-runner@c8454efe5d0bdefd25384362fe217428ca277d57 # v2.2.0
+        with:
+          egress-policy: audit # TODO: change to 'egress-policy: block' after couple of runs
+
       - name: Determine architecture prefix and ref
         env:
           REF: ${{ github.event.workflow_run.head_branch }}
@@ -77,7 +82,7 @@ jobs:
           fi
       - name: Create a GitHub release and clean up artifacts
         id: create-release
-        uses: actions/github-script@v3
+        uses: actions/github-script@f05a81df23035049204b043b50c3322045ce7eb3 # v3.1.1
         with:
           result-encoding: string
           script: |
@@ -131,7 +136,7 @@ jobs:
 
       - name: Upload rootfs for the release
         id: upload-rootfs-asset
-        uses: actions/upload-release-asset@v1
+        uses: actions/upload-release-asset@e8f9f06c4b078e705bd2ea027f0926603fc9b4d5 # v1.0.2
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
@@ -141,7 +146,7 @@ jobs:
           asset_content_type: application/octet-stream
       - name: Upload kernel for the release
         id: upload-kernel-asset
-        uses: actions/upload-release-asset@v1
+        uses: actions/upload-release-asset@e8f9f06c4b078e705bd2ea027f0926603fc9b4d5 # v1.0.2
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
@@ -151,7 +156,7 @@ jobs:
           asset_content_type: application/octet-stream
       - name: Upload installer.img for the release
         id: upload-installer-asset
-        uses: actions/upload-release-asset@v1
+        uses: actions/upload-release-asset@e8f9f06c4b078e705bd2ea027f0926603fc9b4d5 # v1.0.2
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
@@ -161,7 +166,7 @@ jobs:
           asset_content_type: application/octet-stream
       - name: Upload initrd.img for the release
         id: upload-initrd-asset
-        uses: actions/upload-release-asset@v1
+        uses: actions/upload-release-asset@e8f9f06c4b078e705bd2ea027f0926603fc9b4d5 # v1.0.2
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
@@ -171,7 +176,7 @@ jobs:
           asset_content_type: application/octet-stream
       - name: Upload initrd.bits for the release
         id: upload-initrd-bits-asset
-        uses: actions/upload-release-asset@v1
+        uses: actions/upload-release-asset@e8f9f06c4b078e705bd2ea027f0926603fc9b4d5 # v1.0.2
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
@@ -181,7 +186,7 @@ jobs:
           asset_content_type: application/octet-stream
       - name: Upload ipxe.efi for the release
         id: upload-ipxe-efi-asset
-        uses: actions/upload-release-asset@v1
+        uses: actions/upload-release-asset@e8f9f06c4b078e705bd2ea027f0926603fc9b4d5 # v1.0.2
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
@@ -191,7 +196,7 @@ jobs:
           asset_content_type: application/octet-stream
       - name: Upload ipxe.efi.cfg for the release
         id: upload-ipxe-efi-cfg-asset
-        uses: actions/upload-release-asset@v1
+        uses: actions/upload-release-asset@e8f9f06c4b078e705bd2ea027f0926603fc9b4d5 # v1.0.2
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
@@ -201,7 +206,7 @@ jobs:
           asset_content_type: application/octet-stream
       - name: Upload ipxe.efi.ip.cfg for the release
         id: upload-ipxe-efi-ip-cfg-asset
-        uses: actions/upload-release-asset@v1
+        uses: actions/upload-release-asset@e8f9f06c4b078e705bd2ea027f0926603fc9b4d5 # v1.0.2
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:

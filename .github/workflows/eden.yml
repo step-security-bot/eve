@@ -13,6 +13,9 @@ on:  # yamllint disable-line rule:truthy
     paths-ignore:
       - 'docs/**'
 
+permissions:
+  contents: read
+
 jobs:
   integration:
     name: Integration test (tpm=${{ matrix.tpm }};${{ matrix.fs }})
@@ -24,6 +27,11 @@ jobs:
         fs: ["zfs", "ext4"]
     if: ${{ github.event.review.state == 'approved' || github.ref == 'refs/heads/master' || startsWith(github.ref, 'refs/tags') }}
     steps:
+      - name: Harden Runner
+        uses: step-security/harden-runner@c8454efe5d0bdefd25384362fe217428ca277d57 # v2.2.0
+        with:
+          egress-policy: audit # TODO: change to 'egress-policy: block' after couple of runs
+
       - name: Check
         run: |
           for addr in $(ip addr list|sed -En -e 's/.*inet ([0-9.]+).*/\1/p')
@@ -40,7 +48,7 @@ jobs:
           sudo add-apt-repository ppa:stefanberger/swtpm-jammy
           sudo apt install -y qemu-utils qemu-system-x86 jq swtpm
       - name: get eve
-        uses: actions/checkout@v3
+        uses: actions/checkout@ac593985615ec2ede58e132d2e21d2b1cbd6127c # v3.3.0
         with:
           path: 'eve'
       - name: prepare eden
@@ -141,7 +149,7 @@ jobs:
           echo "::endgroup::"
       - name: Store raw test results
         if: ${{ always() }}
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@0b7f8abb1508181956e8e162db84b466c27e18ce # v3.1.2
         with:
           name: eden-report-tpm-${{ matrix.tpm }}-${{ matrix.fs }}
           path: |

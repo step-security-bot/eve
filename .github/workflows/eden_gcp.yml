@@ -39,6 +39,9 @@ concurrency:
   group: ${{ github.workflow }}
 
 # yamllint disable rule:line-length
+permissions:
+  contents: read
+
 jobs:
   integration:
     name: Integration test (${{ matrix.backend }};${{ matrix.hv }};${{ matrix.fs }})
@@ -50,6 +53,11 @@ jobs:
         hv: ["kvm", "xen"]
         fs: ["zfs", "ext4"]
     steps:
+      - name: Harden Runner
+        uses: step-security/harden-runner@c8454efe5d0bdefd25384362fe217428ca277d57 # v2.2.0
+        with:
+          egress-policy: audit # TODO: change to 'egress-policy: block' after couple of runs
+
       - name: Check
         run: |
           for addr in $(ip addr list|sed -En -e 's/.*inet ([0-9.]+).*/\1/p')
@@ -83,14 +91,14 @@ jobs:
       - id: 'gcpauth'
         if: matrix.backend == 'gcp'
         name: GCP Auth to Google Cloud SDK
-        uses: google-github-actions/auth@v1
+        uses: google-github-actions/auth@ef5d53e30bbcd8d0836f4288f5e50ff3e086997d # v1.0.0
         with:
           project_id: ${{ secrets.GCP_PROJECT_ID }}
           credentials_json: ${{ secrets.GCP_SA_KEY }}
           create_credentials_file: true
       - name: GCP Set up Google Cloud SDK
         if: matrix.backend == 'gcp'
-        uses: google-github-actions/setup-gcloud@v1
+        uses: google-github-actions/setup-gcloud@62d4898025f6041e16b1068643bfc5a696863587 # v1.1.0
         with:
           project_id: ${{ secrets.GCP_PROJECT_ID }}
       - name: GCP Clean
@@ -127,7 +135,7 @@ jobs:
       # so we should pull required branch here
       # in case of workflow_dispatch ref will be empty (will point onto main branch)
       - name: Checkout EVE
-        uses: actions/checkout@v3
+        uses: actions/checkout@ac593985615ec2ede58e132d2e21d2b1cbd6127c # v3.3.0
         with:
           fetch-depth: 0
           path: eve
@@ -288,7 +296,7 @@ jobs:
           ROL_PROJECT: ${{ secrets.ROL_PROJECT }}
       - name: Store raw test results
         if: ${{ always() }}
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@0b7f8abb1508181956e8e162db84b466c27e18ce # v3.1.2
         with:
           name: eden-report-${{ matrix.backend }}-${{ matrix.hv }}-${{ matrix.fs }}
           path: |

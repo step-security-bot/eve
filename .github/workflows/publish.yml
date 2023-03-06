@@ -10,6 +10,9 @@ on:  # yamllint disable-line rule:truthy
       - "[0-9]+.[0-9]+.[0-9]+"
       - "[0-9]+.[0-9]+.[0-9]+-lts"
 
+permissions:
+  contents: read
+
 jobs:
   packages:
     if: github.event.repository.full_name == 'lf-edge/eve'
@@ -25,6 +28,11 @@ jobs:
           - os: ubuntu-latest
             arch: riscv64
     steps:
+      - name: Harden Runner
+        uses: step-security/harden-runner@c8454efe5d0bdefd25384362fe217428ca277d57 # v2.2.0
+        with:
+          egress-policy: audit # TODO: change to 'egress-policy: block' after couple of runs
+
       - name: Starting Report
         run: |
           echo Git Ref: ${{ github.ref }}
@@ -33,7 +41,7 @@ jobs:
           df -h
           echo Memory
           free -m
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@ac593985615ec2ede58e132d2e21d2b1cbd6127c # v3.3.0
         with:
           fetch-depth: 0
       - name: Force fetch annotated tags (workaround)
@@ -107,7 +115,12 @@ jobs:
           - arch: riscv64
             hv: mini
     steps:
-      - uses: actions/checkout@v3
+      - name: Harden Runner
+        uses: step-security/harden-runner@c8454efe5d0bdefd25384362fe217428ca277d57 # v2.2.0
+        with:
+          egress-policy: audit # TODO: change to 'egress-policy: block' after couple of runs
+
+      - uses: actions/checkout@ac593985615ec2ede58e132d2e21d2b1cbd6127c # v3.3.0
         with:
           fetch-depth: 0
       - name: Force fetch annotated tags (workaround)
@@ -148,7 +161,12 @@ jobs:
     runs-on: ubuntu-latest
     needs: packages
     steps:
-      - uses: actions/checkout@v3
+      - name: Harden Runner
+        uses: step-security/harden-runner@c8454efe5d0bdefd25384362fe217428ca277d57 # v2.2.0
+        with:
+          egress-policy: audit # TODO: change to 'egress-policy: block' after couple of runs
+
+      - uses: actions/checkout@ac593985615ec2ede58e132d2e21d2b1cbd6127c # v3.3.0
         with:
           fetch-depth: 0
       - name: Force fetch annotated tags (workaround)
